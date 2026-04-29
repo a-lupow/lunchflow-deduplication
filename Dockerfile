@@ -23,4 +23,4 @@ COPY drizzle ./drizzle
 COPY src ./src
 COPY --from=build /app/dist ./dist
 EXPOSE 3000
-CMD ["sh", "-c", "pnpm db:migrate && node dist/main"]
+CMD ["sh", "-c", "pnpm db:migrate && node dist/src/main.js"]
