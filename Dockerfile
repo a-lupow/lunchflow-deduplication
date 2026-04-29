@@ -18,6 +18,9 @@ ENV NODE_ENV=production
 RUN corepack enable
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod
+COPY drizzle.config.ts ./
+COPY drizzle ./drizzle
+COPY src ./src
 COPY --from=build /app/dist ./dist
 EXPOSE 3000
-CMD ["node", "dist/main"]
+CMD ["sh", "-c", "pnpm db:migrate && node dist/main"]
