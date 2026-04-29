@@ -21,6 +21,6 @@ export class TransactionsContrller {
 
     return response
       .status(upstreamResponse.status)
-      .json(this.deduplication.deduplicateResponse(json))
+      .json(await this.deduplication.deduplicateResponse(json))
   }
 }

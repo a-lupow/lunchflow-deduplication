@@ -128,6 +128,7 @@ export class DeduplicationService {
     return {
       ...response,
       transactions,
+      total: transactions.length,
     }
   }
 }
