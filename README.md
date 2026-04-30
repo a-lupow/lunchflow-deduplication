@@ -6,7 +6,7 @@ The reason this project exists is practical: transaction deduplication is not re
 
 This service is intended to solve that problem outside of the bank integration itself. Instead of waiting for Pekao to make transaction identifiers stable, the bridge provides a place to normalize and stabilize transaction handling before data reaches Lunchflow.
 
-In short, the project exists to make deduplication reliable when the upstream bank feed is not.
+In short, the project exists to make deduplication reliable when the upstream bank feed is not, which makes lunchflow deduplicated responses unpredictable.
 
 ## Why this exists
 
@@ -19,11 +19,9 @@ In short, the project exists to make deduplication reliable when the upstream ba
 
 `lunchflow-bridge` is not meant to be the main business system. Its role is narrow and deliberate:
 
-- receive data from the Sure side,
-- apply logic that makes transaction matching and deduplication consistent,
-- forward the cleaned or stabilized result to Lunchflow.
-
-The overall goal is reliability, not complexity.
+- receive data from Lunchflow
+- apply logic that makes transaction matching and deduplication consistent
+- forward stable deduplicated data to Sure
 
 ## Example Docker Compose integration
 
