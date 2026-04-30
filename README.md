@@ -23,6 +23,17 @@ In short, the project exists to make deduplication reliable when the upstream ba
 - apply logic that makes transaction matching and deduplication consistent
 - forward stable deduplicated data to Sure
 
+## How transactions are being deduplicated
+
+Since lunchflow does not return raw identifiers via their api, I came up with the following setup:
+- For each connection I set up the following description template:
+```
+[it.remittanceInformationUnstructured ?? '', `id:${it.transactionId}`].filter(Boolean).join(' ')
+```
+
+- This helps keeping the original description and appends the _raw_ transaction identifier from gocardless. (example: `Payment for invoice #123 id:123567890`)
+- The bridge will then parse the deduplicateion identifier from the description and use it to deduplicate transactions before they reach Sure.
+
 ## Example Docker Compose integration
 
 As part of a Sure stack, the bridge can be added as another service in your `docker-compose.yml`:
